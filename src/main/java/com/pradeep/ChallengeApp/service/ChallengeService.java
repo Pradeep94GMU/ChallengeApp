@@ -12,4 +12,10 @@ public interface ChallengeService {
 
     public boolean createChallenge(Challenge challenge);
 
+    public Challenge getSingleChallenge(String month);
+
+    public boolean updateChallenge(String month, Challenge newChallenge);
+
+    public boolean deleteChallenge(String month);
+
 }

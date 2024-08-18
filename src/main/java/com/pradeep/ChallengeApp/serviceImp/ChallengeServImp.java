@@ -29,5 +29,53 @@ public class ChallengeServImp implements ChallengeService {
         return true;
     }
 
+    @Override
+    public Challenge getSingleChallenge(String month) {
+
+        List<Challenge> list = challengeRepo.findAll();
+
+        for(Challenge challenge: list){
+            if(challenge.getMonth().equalsIgnoreCase(month)){
+                return challenge;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean updateChallenge(String month, Challenge newChallenge) {
+
+        List<Challenge> list = challengeRepo.findAll();
+
+        for(Challenge challenge: list){
+            if(challenge.getMonth().equalsIgnoreCase(month)){
+                challenge.setName(newChallenge.getName());
+                challenge.setMonth(newChallenge.getMonth());
+                challenge.setDescription(newChallenge.getDescription());
+                challengeRepo.save(challenge);
+                System.out.println("Updated :"+challenge);
+                return true;
+            }
+        }
+
+
+        return false;
+    }
+
+    @Override
+    public boolean deleteChallenge(String month) {
+
+        List<Challenge> list = challengeRepo.findAll();
+
+        for(Challenge challenge: list){
+            if(challenge.getMonth().equalsIgnoreCase(month)){
+                challengeRepo.delete(challenge);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
